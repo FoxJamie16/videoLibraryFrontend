@@ -10,7 +10,7 @@
   import FileSaver from 'file-saver';
   const downloadVideo = (key) => {
     // Make a POST request to the backend endpoint for file upload
-    fetch('http://localhost:3000/'+key, {
+    fetch('https://video-library-backend-1111-2n8x7uqrn-foxjamie16.vercel.app/'+key, {
           method: 'get',
         })
           .then(async data => {
