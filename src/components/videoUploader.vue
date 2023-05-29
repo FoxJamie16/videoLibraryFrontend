@@ -26,7 +26,7 @@
         //formData.append('id', '123456');
   
         // Make a POST request to the backend endpoint for file upload
-        fetch('http://localhost:3000/upload', {
+        fetch('https://video-library-backend-fort.vercel.app/upload', {
           method: 'POST',
           body: formData
         })
