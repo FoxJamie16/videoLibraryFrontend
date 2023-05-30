@@ -3,24 +3,26 @@
         <h3>Retrieve a video</h3>
       <input type="text" ref="textInput" @change="handleFileChange" />
       <button @click="getVideo">Get Video</button>
+      <!--To improve usability, a v-if combined with an 'uploadSuccess' variable could be
+         included to show a download button instead of immediately starting the download --> 
     </div>
   </template>
   
 <script>
   import FileSaver from 'file-saver';
   const downloadVideo = (key) => {
-    // Make a POST request to the backend endpoint for file upload
+    // Make a GET request to the backend endpoint for file download
     fetch('https://video-library-backend-fort.vercel.app/'+key, {
           method: 'get',
         })
           .then(async data => {
-            console.log('Video retrieved successfully:', data);
+            // Video retrieved  successfully
             const blob = await data.blob();
 
-            FileSaver.saveAs(blob, "test.mp4");
+            FileSaver.saveAs(blob, "video.mp4");
           })
           .catch(error => {
-            console.error('Error uploading video:', error);
+            console.error('Error downloading video:', error);
           });
   } 
 
@@ -42,7 +44,8 @@
         
         downloadVideo(this.selectedFile);
       },
-
+      
+      // Allows retrieving of video by following a given link, a more robust solution would be provided by vue router. 
       getFileFromURL(){
         if(((new URL(window.location.href)).pathname.split('/')[1])!=""){
             this.selectedFile = (new URL(window.location.href)).pathname.split('/')[1];
